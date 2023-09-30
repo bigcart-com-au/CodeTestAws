@@ -4,8 +4,12 @@ namespace CodeChallenge.Repositories
 {
     public interface IDepthChartRepository
     {
-        Task<DepthChartEntity> GetDepthChart(string position);
+        Task<DepthChartEntity> GetDepthChart(string sportId, string position);
 
-        Task<IEnumerable<DepthChartEntity>> GetDepthCharts(int sportId);
+        Task<IEnumerable<DepthChartEntity>> GetDepthCharts(string sportId);
+
+        Task<DepthChartEntity> AddDepthChart(DepthChartEntity depthChartEntity);
+
+        Task UpdateDepthChart(DepthChartEntity depthChartEntity);
     }
 }
