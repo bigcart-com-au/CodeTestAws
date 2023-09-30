@@ -1,26 +1,47 @@
 ﻿using CodeChallenge.Abstractions;
+using CodeChallenge.Common;
 using CodeChallenge.Domain;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace CodeChallenge.Controllers
 {
     [ApiController]
     [Route("sport/{sportId}/depthcharts")]
-    public class DepthChartsController : Controller
+    public partial class DepthChartController : Controller
     {
         private readonly IDepthChartService _depthChartService;
 
-        public DepthChartsController(IDepthChartService depthChartService)
+        public DepthChartController(IDepthChartService depthChartService)
         {
             _depthChartService = depthChartService;
         }
 
         [HttpGet]
-        public IEnumerable<DepthChart> GetDepthCharts([FromQuery] QueryOnRemainingPlayersPosition query)
+        public async Task<IActionResult> GetDepthCharts([FromRoute] string sportId, [FromQuery] QueryPlayersBehindThePlayerInDepthChart query)
         {
-            //Validate Query
+            if (IsQueryValid(query))
+            {
+                var playersBehindThePlayerResult = await _depthChartService.GetPlayersBehindThePlayerInDepthChart(sportId, query.Position, query.PlayerId.Value);
+                if (playersBehindThePlayerResult.IsFailure)
+                {
+                    return new ObjectResult(new Error(playersBehindThePlayerResult.Error))
+                    {
+                        StatusCode = (int?)HttpStatusCode.BadRequest
+                    };
+                }
 
-            return _depthChartService.GetDepthCharts().Value;
+                return new OkObjectResult(playersBehindThePlayerResult.Value);
+            }
+
+            var result = await _depthChartService.GetDepthCharts(sportId);
+
+            return new OkObjectResult(result.Value);
+        }
+
+        private static bool IsQueryValid(QueryPlayersBehindThePlayerInDepthChart query)
+        {
+            return !string.IsNullOrWhiteSpace(query.Position) && (query.PlayerId != null && query.PlayerId > 0);
         }
     }
 }

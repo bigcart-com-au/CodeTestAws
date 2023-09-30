@@ -1,6 +1,8 @@
 ﻿using CodeChallenge.Abstractions;
+using CodeChallenge.Common;
 using CodeChallenge.Domain;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace CodeChallenge.Controllers
 {
@@ -8,21 +10,50 @@ namespace CodeChallenge.Controllers
     [Route("sport/{sportId}/player")]
     public class PlayerController
     {
-        private readonly IDepthChartService _depthChartService;
+        private readonly IPlayerService _playerService;
 
-        public PlayerController(IDepthChartService depthChartService)
+        public PlayerController(IPlayerService playerService)
         {
-            _depthChartService = depthChartService;
+            _playerService = playerService;
         }
 
         [HttpPost]
-        public async Task AddPlayer([FromRoute]int sportId, [FromBody]Player player) { 
+        public async Task<IActionResult> AddPlayer([FromRoute] string sportId, [FromBody] Player player)
+        {
             //Validate sportId
             //Validate player
 
-            //call depthchart service to add player
+            var result = await _playerService.AddPlayer(sportId, player);
 
-            //return response created 201
+            if (result.IsFailure)
+            {
+                new ObjectResult(new Error(result.Error))
+                {
+                    StatusCode = (int?)HttpStatusCode.InternalServerError
+                };
+            }
+
+            return new CreatedResult("", player);
+        }
+
+
+        [HttpDelete]
+        public async Task<IActionResult> RemovePlayer([FromRoute] string sportId, [FromRoute] int playerId)
+        {
+            //Validate sportId
+            //Validate player
+
+            var result = await _playerService.RemovePlayer(sportId, playerId);
+
+            if (!result.Success)
+            {
+                new ObjectResult(new Error(result.Error))
+                {
+                    StatusCode = (int?)HttpStatusCode.InternalServerError
+                };
+            }
+
+            return new OkResult();
         }
     }
 }
