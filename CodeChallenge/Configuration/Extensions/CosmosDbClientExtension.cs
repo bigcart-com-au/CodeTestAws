@@ -5,11 +5,9 @@ namespace CodeChallenge.Configuration.Extensions
 {
     public static class CosmosDbClientExtension
     {
-        private static readonly string CosmosPrimaryKey = "EJr6onUmz1KeSDBAbeVD2jBiVN1DX5sm2KvKJYPxWOsXMd6I8NHhyoiyK04jQP3nXF8xiAo1evaoACDbjAdvEA==";
-
         public static void AddCosmosDbClient(this IServiceCollection services, IAppSettings appSettings)
         {
-            var client = new CosmosClientBuilder(appSettings.CosmosDb.AccountEndpoint, CosmosPrimaryKey)
+            var client = new CosmosClientBuilder(appSettings.CosmosDb.AccountEndpoint, appSettings.CosmosDb.PrimaryKey)
                 .WithSerializerOptions(new CosmosSerializationOptions
                 {
                     PropertyNamingPolicy = CosmosPropertyNamingPolicy.CamelCase

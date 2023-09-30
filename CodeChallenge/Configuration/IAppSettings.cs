@@ -9,5 +9,6 @@
     {
         public string DatabaseName { get; set; }
         public string AccountEndpoint { get; set; }
+        public string PrimaryKey { get; set; }
     }
 }
