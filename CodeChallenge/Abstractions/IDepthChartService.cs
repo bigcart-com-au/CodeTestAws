@@ -1,15 +1,14 @@
-﻿using CodeChallenge.Domain;
+﻿using CodeChallenge.Common;
+using CodeChallenge.Domain;
 
 namespace CodeChallenge.Abstractions
 {
     public interface IDepthChartService
     {
-        Task<Result> AddPlayer(int sportId, Player player);
+        Task<Result> AddPlayer(string sportId, Player player);
 
-        Result<IEnumerable<DepthChart>> GetDepthCharts();
+        Task<Result<IEnumerable<DepthChartResponse>>> GetDepthCharts(string sportId);
 
-        Result<DepthChart> GetDepthChart(string position);
-
-        Result<DepthChart> GetDepthChartRemainingPlayer(string position, string playerName);
+        Task<Result<int[]>> GetPlayersBehindThePlayerInDepthChart(string sportId, string position, int playerId);
     }
 }
