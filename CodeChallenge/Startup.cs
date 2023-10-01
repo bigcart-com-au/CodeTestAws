@@ -21,6 +21,7 @@ namespace CodeChallenge
         public void ConfigureServices(IServiceCollection services)
         {
             var httpContextAccessor = new HttpContextAccessor();
+            services.AddSwaggerGen();
             services.AddSingleton<IHttpContextAccessor>(httpContextAccessor);
             services
             .AddControllers()
@@ -43,7 +44,14 @@ namespace CodeChallenge
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(options =>
+                {
+                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+                    options.RoutePrefix = string.Empty;
+                });
             }
+            app.UseHttpsRedirection();
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
