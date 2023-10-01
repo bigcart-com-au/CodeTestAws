@@ -42,6 +42,7 @@ namespace CodeChallenge
             services.AddScoped<IDepthChartService, DepthChartService>();
             services.AddScoped<IPlayerRepository, PlayerRepository>();
             services.AddScoped<IDepthChartRepository, DepthChartRepository>();
+            services.AddScoped<ISportRepository, SportRepository>();
             services.AddScoped<IValidator<Player>, PlayerValidator>();
         }
 

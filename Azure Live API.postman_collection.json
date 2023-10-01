@@ -1,0 +1,153 @@
+{
+	"info": {
+		"_postman_id": "5bd51779-c2b1-4d6b-bb62-33942b9524d8",
+		"name": "Azure Live API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21624254"
+	},
+	"item": [
+		{
+			"name": "Get Depthchart",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Bob\",\r\n    \"position\": \"KR\",\r\n    \"playerId\":\"3\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://codetest-depthchart.azurewebsites.net/sport/1/depthcharts",
+					"protocol": "https",
+					"host": [
+						"codetest-depthchart",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"sport",
+						"1",
+						"depthcharts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Player",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Bob\",\r\n    \"position\": \"KR\",\r\n    \"playerId\":\"3\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://codetest-depthchart.azurewebsites.net/sport/1/player",
+					"protocol": "https",
+					"host": [
+						"codetest-depthchart",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"sport",
+						"1",
+						"player"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Player",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Bob\",\r\n    \"position\": \"KR\",\r\n    \"playerId\":\"3\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://codetest-depthchart.azurewebsites.net/sport/1/player/5/position/WR",
+					"protocol": "https",
+					"host": [
+						"codetest-depthchart",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"sport",
+						"1",
+						"player",
+						"5",
+						"position",
+						"WR"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Players behind in position",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Bob\",\r\n    \"position\": \"KR\",\r\n    \"playerId\":\"3\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://codetest-depthchart.azurewebsites.net/sport/1/depthcharts?position=WR&playerId=2",
+					"protocol": "https",
+					"host": [
+						"codetest-depthchart",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"sport",
+						"1",
+						"depthcharts"
+					],
+					"query": [
+						{
+							"key": "position",
+							"value": "WR"
+						},
+						{
+							"key": "playerId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

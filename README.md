@@ -1,4 +1,4 @@
-# Code challenge 
+# Code challenge [![Build](https://github.com/soma-potta/CodeTest/actions/workflows/main_codetest-depthchart.yml/badge.svg?branch=main)](https://github.com/soma-potta/CodeTest/actions/workflows/main_codetest-depthchart.yml)
 
 ## Description
 
@@ -12,7 +12,7 @@ GET  : `/sport/{sportId}/depthchart?position=WR&playerId=2` ->  Retrieves player
 
 Note: Only two sports are supported 
  - NFL - sportId value is 1
- - MLB - sportId value is 2
+ - MLB - sportId value is 2<br/>
 Implementing CRUD operations on Sport can extend this API to support multiple sports in future.
 
 ## Getting Started
@@ -47,9 +47,12 @@ Implementing CRUD operations on Sport can extend this API to support multiple sp
   The above command restores and builds the project. If the build is successful it runs the API on url `https://localhost:7068`. If the port is not available then update it in launchSettings.json file.
 
   Go to swagger: https://localhost:7068/index.html to test on local machine
+  Postman collection is available in the project root folder to use.
 
 
 #### Live version
+
+* Live version of this API is available at: https://codetest-depthchart.azurewebsites.net Clicking on this link opens swagger.
 
 ## Assumptions 
 

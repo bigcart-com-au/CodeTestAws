@@ -10,7 +10,7 @@ namespace CodeChallenge.Repositories
         private readonly Container _playerContainer;
 
         private static QueryDefinition QueryByPlayer(string type, string sportId, int playerId) =>
-           new QueryDefinition($"SELECT TOP 1 * FROM p WHERE p.sportId = '{sportId}' and p.type = '{type}' and p.playerId = '{playerId}'");
+           new QueryDefinition($"SELECT TOP 1 * FROM p WHERE p.sportId = '{sportId}' and p.type = '{type}' and p.playerId = {playerId}");
 
         public PlayerRepository(CosmosClient client, IAppSettings appSettings)
         {

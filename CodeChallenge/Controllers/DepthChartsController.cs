@@ -35,6 +35,12 @@ namespace CodeChallenge.Controllers
             }
 
             var result = await _depthChartService.GetDepthCharts(sportId);
+            if (result.IsFailure) {
+                return new ObjectResult(new Error(result.Error))
+                {
+                    StatusCode = (int?)HttpStatusCode.BadRequest
+                };
+            }
 
             return new OkObjectResult(result.Value);
         }

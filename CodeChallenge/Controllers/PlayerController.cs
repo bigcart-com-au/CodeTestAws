@@ -24,7 +24,7 @@ namespace CodeChallenge.Controllers
 
             if (result.IsFailure)
             {
-                new ObjectResult(new Error(result.Error))
+                return new ObjectResult(new Error(result.Error))
                 {
                     StatusCode = (int?)HttpStatusCode.BadRequest
                 };
@@ -42,7 +42,7 @@ namespace CodeChallenge.Controllers
 
             if (result.IsFailure)
             {
-                new ObjectResult(new Error(result.Error))
+                return new ObjectResult(new Error(result.Error))
                 {
                     StatusCode = (int?)HttpStatusCode.BadRequest
                 };
