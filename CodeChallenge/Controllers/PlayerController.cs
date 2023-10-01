@@ -38,6 +38,7 @@ namespace CodeChallenge.Controllers
 
 
         [HttpDelete]
+        [Route("{playerId}")]
         public async Task<IActionResult> RemovePlayer([FromRoute] string sportId, [FromRoute] int playerId)
         {
             //Validate sportId
