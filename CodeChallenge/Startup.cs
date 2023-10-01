@@ -1,8 +1,12 @@
 ﻿using CodeChallenge.Abstractions;
 using CodeChallenge.Configuration;
 using CodeChallenge.Configuration.Extensions;
+using CodeChallenge.Domain;
 using CodeChallenge.Repositories;
 using CodeChallenge.Services;
+using CodeChallenge.Validators;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 
 namespace CodeChallenge
 {
@@ -21,6 +25,7 @@ namespace CodeChallenge
         public void ConfigureServices(IServiceCollection services)
         {
             var httpContextAccessor = new HttpContextAccessor();
+            services.AddMvc();
             services.AddSwaggerGen();
             services.AddSingleton<IHttpContextAccessor>(httpContextAccessor);
             services
@@ -32,10 +37,12 @@ namespace CodeChallenge
 
             services.AddSingleton(appSettings);
             services.AddCosmosDbClient(appSettings);
+            services.AddFluentValidationAutoValidation();
             services.AddScoped<IPlayerService, PlayerService>();
             services.AddScoped<IDepthChartService, DepthChartService>();
             services.AddScoped<IPlayerRepository, PlayerRepository>();
             services.AddScoped<IDepthChartRepository, DepthChartRepository>();
+            services.AddScoped<IValidator<Player>, PlayerValidator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
