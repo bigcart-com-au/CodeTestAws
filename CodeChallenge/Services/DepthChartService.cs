@@ -98,5 +98,31 @@ namespace CodeChallenge.Services
 
             return Result.Ok(playersBehindThePlayerInDepthChart);
         }
+
+        public async Task<Result> RemovePlayer(string sportId, int playerId, string position)
+        {
+            var depthChart = await _depthChartRepository.GetDepthChart(sportId, position);
+            var playerRanking = depthChart.RankedPlayerIds.ToList();
+
+            if (!playerRanking.Contains(playerId))
+            {
+                return Result.Fail("Player not in position");
+            }
+
+            var indexOfPlayerRankToRemove = playerRanking.IndexOf(playerId);
+            var updatedPlayerRanking = playerRanking.Where((item, index) => index != indexOfPlayerRankToRemove).ToList();
+
+            var depthChartEntity = new DepthChartEntity
+            {
+                Id = depthChart.Id,
+                Position = position,
+                SportId = sportId,
+                RankedPlayerIds = updatedPlayerRanking
+            };
+
+            await _depthChartRepository.UpdateDepthChart(depthChartEntity);
+
+            return Result.Ok();
+        }
     }
 }

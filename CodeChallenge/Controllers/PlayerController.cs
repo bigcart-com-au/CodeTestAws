@@ -38,19 +38,16 @@ namespace CodeChallenge.Controllers
 
 
         [HttpDelete]
-        [Route("{playerId}")]
-        public async Task<IActionResult> RemovePlayer([FromRoute] string sportId, [FromRoute] int playerId)
+        [Route("{playerId}/depthchart/{position}")]
+        public async Task<IActionResult> RemovePlayer([FromRoute] string sportId, [FromRoute] int playerId, [FromRoute] string position)
         {
-            //Validate sportId
-            //Validate player
+            var result = await _playerService.RemovePlayer(sportId, playerId, position);
 
-            var result = await _playerService.RemovePlayer(sportId, playerId);
-
-            if (!result.Success)
+            if (result.IsFailure)
             {
                 new ObjectResult(new Error(result.Error))
                 {
-                    StatusCode = (int?)HttpStatusCode.InternalServerError
+                    StatusCode = (int?)HttpStatusCode.BadRequest
                 };
             }
 

@@ -52,17 +52,19 @@ namespace CodeChallenge.Services
             return Result.Ok(playerEntity);
         }
 
-        //TODO: include depth chart
-        public async Task<Result> RemovePlayer(string sportId, int playerId)
+     
+        public async Task<Result> RemovePlayer(string sportId, int playerId, string position)
         {
             var existingPlayer = await _playerRepository.GetPlayer(sportId, playerId);
-
             if (existingPlayer == null)
             {
                 return Result.Fail("Player doesn't exist");
             }
 
-
+            var result = await _depthChartService.RemovePlayer(sportId, playerId, position);
+            if (result.IsFailure) {
+                return Result.Fail(result.Error);
+            }
 
             return Result.Ok();
         }

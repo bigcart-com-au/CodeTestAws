@@ -8,6 +8,6 @@ namespace CodeChallenge.Abstractions
     {
         Task<Result<PlayerEntity>> AddPlayer(string sportId, Player player);
 
-        Task<Result> RemovePlayer(string sportId, int playerId);
+        Task<Result> RemovePlayer(string sportId, int playerId, string position);
     }
 }
