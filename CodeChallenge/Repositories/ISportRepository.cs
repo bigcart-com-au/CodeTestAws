@@ -4,6 +4,6 @@ namespace CodeChallenge.Repositories
 {
     public interface ISportRepository
     {
-        Task AddSport(SportEntity sport);
+        Task<SportEntity> GetSport(string sportId);
     }
 }

@@ -20,16 +20,13 @@ namespace CodeChallenge.Controllers
         [HttpPost]
         public async Task<IActionResult> AddPlayer([FromRoute] string sportId, [FromBody] Player player)
         {
-            //Validate sportId
-            //Validate player
-
             var result = await _playerService.AddPlayer(sportId, player);
 
             if (result.IsFailure)
             {
                 new ObjectResult(new Error(result.Error))
                 {
-                    StatusCode = (int?)HttpStatusCode.InternalServerError
+                    StatusCode = (int?)HttpStatusCode.BadRequest
                 };
             }
 

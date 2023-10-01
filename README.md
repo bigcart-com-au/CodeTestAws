@@ -10,6 +10,10 @@ DELETE : `/sport/{sportId}/player/{playerId}` -> Deletes a player and updates th
 GET  : `/sport/{sportId}/depthchart` ->  Retrieves all the depthcharts for the sport.<br/>
 GET  : `/sport/{sportId}/depthchart?position=WR&playerId=2` ->  Retrieves players behind the given player in the query for the position.<br/>
 
+Note: Only two sports are supported 
+ - NFL - sportId value is 1
+ - MLB - sportId value is 2
+Implementing CRUD operations on Sport can extend this API to support multiple sports in future.
 
 ## Getting Started
 

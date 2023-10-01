@@ -9,13 +9,16 @@ namespace CodeChallenge.Services
     public class DepthChartService : IDepthChartService
     {
         private readonly IDepthChartRepository _depthChartRepository;
+        private readonly ISportRepository _sportRepository;
         private readonly ILogger<DepthChartService> _logger;
 
         public DepthChartService(
             IDepthChartRepository depthChartRepository,
+            ISportRepository sportRepository,
             ILogger<DepthChartService> logger)
         {
             _depthChartRepository = depthChartRepository;
+            _sportRepository = sportRepository;
             _logger = logger;
         }
 
@@ -71,6 +74,12 @@ namespace CodeChallenge.Services
 
         public async Task<Result<IEnumerable<DepthChartResponse>>> GetDepthCharts(string sportId)
         {
+            var sport = await _sportRepository.GetSport(sportId);
+            if (sport == null)
+            {
+                return Result.Fail<IEnumerable<DepthChartResponse>>("Sport doesn't exist");
+            }
+
             var result = await _depthChartRepository.GetDepthCharts(sportId);
 
             var depthChartsResponse = result.Select(e => new DepthChartResponse
@@ -84,7 +93,17 @@ namespace CodeChallenge.Services
 
         public async Task<Result<int[]>> GetPlayersBehindThePlayerInDepthChart(string sportId, string position, int playerId)
         {
+            var sport = await _sportRepository.GetSport(sportId);
+            if (sport == null)
+            {
+                return Result.Fail<int[]>("Sport doesn't exist");
+            }
+
             var depthChart = await _depthChartRepository.GetDepthChart(sportId, position);
+            if (depthChart == null) 
+            {
+                return Result.Fail<int[]>("Position doesn't exist for sport");
+            }
 
             var playerRanking = depthChart.RankedPlayerIds.ToList();
             var indexOfPlayer = playerRanking.FindIndex(p => p == playerId);

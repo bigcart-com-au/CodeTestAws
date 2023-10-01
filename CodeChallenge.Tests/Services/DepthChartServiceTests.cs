@@ -13,13 +13,31 @@ namespace CodeChallenge.Tests.Services
     {
         private readonly DepthChartService _service;
         private IDepthChartRepository _depthChartRepository;
+        private ISportRepository _sportChartRepository;
 
         public DepthChartServiceTests()
         {
             _depthChartRepository = Substitute.For<IDepthChartRepository>();
+            _sportChartRepository = Substitute.For<ISportRepository>();
             var logger = Substitute.For<ILogger<DepthChartService>>();
 
-            _service = new DepthChartService(_depthChartRepository, logger);
+            _service = new DepthChartService(_depthChartRepository, _sportChartRepository,  logger);
+        }
+
+        [Fact]
+        public async Task GetDepthCharts_WhenSportIdIsNotValid_ReturnFailSportNotValid()
+        {
+            // Arrange
+            var sportsId = "1";
+            _sportChartRepository
+                .GetSport(sportsId)
+                .Returns(Task.FromResult<SportEntity>(null));
+
+            // Act
+            var result = await _service.GetDepthCharts(sportsId);
+
+            // Assert
+            result.Success.Should().Be(false);
         }
 
         [Fact]
@@ -37,6 +55,9 @@ namespace CodeChallenge.Tests.Services
             _depthChartRepository
                 .GetDepthChart(sportsId, player.Position)
                 .Returns(Task.FromResult((DepthChartEntity)null));
+            _sportChartRepository
+                .GetSport(sportsId)
+                .Returns(Task.FromResult(new SportEntity { SportId = "1" }));
 
             // Act
             var result = await _service.AddPlayer(sportsId, player);
@@ -67,6 +88,9 @@ namespace CodeChallenge.Tests.Services
             _depthChartRepository
                 .GetDepthChart(sportsId, player.Position)
                 .Returns(Task.FromResult(depthChart));
+            _sportChartRepository
+                .GetSport(sportsId)
+                .Returns(Task.FromResult(new SportEntity { SportId = "1" }));
 
             // Act
             var result = await _service.AddPlayer(sportsId, player);
