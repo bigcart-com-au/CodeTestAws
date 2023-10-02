@@ -86,7 +86,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://codetest-depthchart.azurewebsites.net/sport/1/player/5/position/WR",
+					"raw": "https://codetest-depthchart.azurewebsites.net/sport/1/player/5/depthchart/WR",
 					"protocol": "https",
 					"host": [
 						"codetest-depthchart",

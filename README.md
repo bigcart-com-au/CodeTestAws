@@ -67,3 +67,11 @@ Implementing CRUD operations on Sport can extend this API to support multiple sp
 * Get players behind the player query takes playerId instead of name. This avoids confusion if two players have the same name.
 
 * This API is not authenticated. Anyone can access this.
+
+## Next improvements:
+Below are the improvements I would like to make provided more time.
+* Database writes can be segregated as Commands and reads can be made as queries following CQRS pattern.
+* For resilience, when Cosmos db throughput limits are hit circuit breaker pattern can be applied to commands and queries.
+* Containerize the application and deploy to cloud kubernetes offering (Azure or AWS).
+* Implement API for CRUD operations of `/sport`, this allows to extend the API to support multiple sports.
+* Implement Auth 2.0 standards for authorisaton through access tokens.

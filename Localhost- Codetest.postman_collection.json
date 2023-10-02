@@ -51,7 +51,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:7068/sport/1/player/5/position/WR",
+					"raw": "https://localhost:7068/sport/1/player/5/depthchart/WR",
 					"protocol": "https",
 					"host": [
 						"localhost"

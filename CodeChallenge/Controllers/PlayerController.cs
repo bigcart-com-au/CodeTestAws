@@ -34,8 +34,7 @@ namespace CodeChallenge.Controllers
         }
 
 
-        [HttpDelete]
-        [Route("{playerId}/depthchart/{position}")]
+        [HttpDelete("{playerId}/depthchart/{position}")]
         public async Task<IActionResult> RemovePlayer([FromRoute] string sportId, [FromRoute] int playerId, [FromRoute] string position)
         {
             var result = await _playerService.RemovePlayer(sportId, playerId, position);
