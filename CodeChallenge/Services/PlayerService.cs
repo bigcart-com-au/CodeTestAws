@@ -28,8 +28,8 @@ namespace CodeChallenge.Services
         public async Task<Result<PlayerEntity>> AddPlayer(string sportId, Player player)
         {
             var sport = await _sportRepository.GetSport(sportId);
-            if (sport == null) {
-                return Result.Fail<PlayerEntity>("Sport doesn't exist");
+            if (sport == null || !sport.Positions.Contains(player.Position)) {
+                return Result.Fail<PlayerEntity>("Invalid sport or position");
             }
 
             var existingPlayer = await _playerRepository.GetPlayer(sportId, player.PlayerId);

@@ -5,7 +5,9 @@ VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeChallenge", "CodeChallenge\CodeChallenge.csproj", "{D3F0DC9D-5826-485F-B7A7-71C278383FCF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeChallenge.Tests", "CodeChallenge.Tests\CodeChallenge.Tests.csproj", "{EE4A1937-AE81-47BC-9AC8-C1F712D6B020}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeChallenge.Tests", "CodeChallenge.Tests\CodeChallenge.Tests.csproj", "{EE4A1937-AE81-47BC-9AC8-C1F712D6B020}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeChallenge.Integration.Tests", "CodeChallenge.Integration.Tests\CodeChallenge.Integration.Tests.csproj", "{814C9A0C-276E-487F-A7D1-F7E73DACAAE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{EE4A1937-AE81-47BC-9AC8-C1F712D6B020}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE4A1937-AE81-47BC-9AC8-C1F712D6B020}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE4A1937-AE81-47BC-9AC8-C1F712D6B020}.Release|Any CPU.Build.0 = Release|Any CPU
+		{814C9A0C-276E-487F-A7D1-F7E73DACAAE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{814C9A0C-276E-487F-A7D1-F7E73DACAAE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{814C9A0C-276E-487F-A7D1-F7E73DACAAE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{814C9A0C-276E-487F-A7D1-F7E73DACAAE1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
